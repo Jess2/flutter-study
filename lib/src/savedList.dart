@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-class SavedList extends StatelessWidget {
+class SavedList extends StatefulWidget {
   SavedList({@required this.saved});
 
   final Set<WordPair> saved;
 
+  @override
+  _SavedListState createState() => _SavedListState();
+}
+
+class _SavedListState extends State<SavedList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +23,7 @@ class SavedList extends StatelessWidget {
 
   Widget _buildList() {
     return ListView.builder(
-        itemCount: saved.length * 2,
+        itemCount: widget.saved.length * 2,
         itemBuilder: (context, index) {
           if (index.isOdd) {
             return Divider();
@@ -26,15 +31,21 @@ class SavedList extends StatelessWidget {
 
           var realIndex = index ~/ 2;
 
-          return _buildRow(saved.toList()[realIndex]);
+          return _buildRow(widget.saved.toList()[realIndex]);
         });
   }
 
   Widget _buildRow(WordPair pair) {
     return ListTile(
         title: Text(
-      pair.asPascalCase,
-      textScaleFactor: 1.5,
-    ));
+          pair.asPascalCase,
+          textScaleFactor: 1.5,
+        ),
+        trailing: Icon(Icons.remove_circle, color: Colors.red),
+        onTap: () {
+          setState(() {
+            widget.saved.remove(pair);
+          });
+        });
   }
 }

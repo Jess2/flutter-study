@@ -44,7 +44,7 @@ class _RandomListState extends State<RandomList> {
         pair.asPascalCase,
         textScaleFactor: 1.5,
       ),
-      trailing: Icon(Icons.favorite_border),
+      trailing: Icon(Icons.favorite_border, color: Colors.red),
     );
   }
 }

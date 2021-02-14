@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:first_flutter_app/src/saved.dart';
+import 'package:first_flutter_app/src/savedList.dart';
 
 
 class RandomList extends StatefulWidget {
@@ -24,7 +24,7 @@ class _RandomListState extends State<RandomList> {
             icon: Icon(Icons.list_alt),
             onPressed: (){
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Saved())
+                MaterialPageRoute(builder: (context) => SavedList(saved: _saved))
               );
             },
           )

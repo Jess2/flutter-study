@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:first_flutter_app/src/savedList.dart';
 
 class RandomList extends StatefulWidget {
   @override
@@ -15,7 +16,23 @@ class _RandomListState extends State<RandomList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Jess2")),
+      appBar: AppBar(
+        title: Text("Jess2"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.list_alt),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(
+                builder: (context) => SavedList(saved: _saved),
+              ))
+                  .then((value) {
+                setState(() {});
+              });
+            },
+          )
+        ],
+      ),
       body: _buildList(),
     );
   }
@@ -46,11 +63,9 @@ class _RandomListState extends State<RandomList> {
         pair.asPascalCase,
         textScaleFactor: 1.5,
       ),
-      trailing: Icon(
-          alreadySaved ? Icons.favorite : Icons.favorite_border,
-          color: Colors.red
-      ),
-      onTap: (){
+      trailing: Icon(alreadySaved ? Icons.favorite : Icons.favorite_border,
+          color: Colors.red),
+      onTap: () {
         setState(() {
           if (alreadySaved) {
             _saved.remove(pair);

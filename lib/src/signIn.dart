@@ -1,14 +1,15 @@
 import 'package:first_flutter_app/src/random_list.dart';
+import 'package:first_flutter_app/src/signUp.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _LoginState();
+    return _SignInState();
   }
 }
 
-class _LoginState extends State<Login> with ValidationMixin {
+class _SignInState extends State<SignIn> with ValidationMixin {
   final formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
@@ -22,7 +23,7 @@ class _LoginState extends State<Login> with ValidationMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-                margin: EdgeInsets.only(bottom: 30.0),
+                margin: EdgeInsets.only(bottom: 20.0),
                 color: Colors.blue,
                 width: 100.0,
                 height: 100.0,
@@ -45,10 +46,16 @@ class _LoginState extends State<Login> with ValidationMixin {
               child: passwordField(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0),
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
               height: 50.0,
               width: double.infinity,
               child: submitButton(),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
+              height: 50.0,
+              width: double.infinity,
+              child: signUpButton(),
             ),
           ],
         ),
@@ -87,10 +94,11 @@ class _LoginState extends State<Login> with ValidationMixin {
   Widget submitButton() {
     return RaisedButton(
       color: Colors.blue,
-      child: Text('Sign In',
+      child: Text('로그인',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
+            fontWeight: FontWeight.bold,
           )),
       onPressed: () {
         if (formKey.currentState.validate()) {
@@ -101,6 +109,25 @@ class _LoginState extends State<Login> with ValidationMixin {
             setState(() {});
           });
         }
+      },
+    );
+  }
+
+  Widget signUpButton() {
+    return RaisedButton(
+      color: Colors.orange,
+      child: Text('회원가입',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          )),
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SignUp(),
+        )).then((value) {
+          setState(() {});
+        });
       },
     );
   }

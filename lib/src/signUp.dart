@@ -1,13 +1,15 @@
+import 'package:first_flutter_app/src/random_list.dart';
+import 'package:first_flutter_app/src/signIn.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _LoginState();
+    return _SignUpState();
   }
 }
 
-class _LoginState extends State<Login> with ValidationMixin {
+class _SignUpState extends State<SignUp> with ValidationMixin {
   final formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
@@ -21,28 +23,28 @@ class _LoginState extends State<Login> with ValidationMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 30.0),
-              color: Colors.blue,
-              width: 100.0,
-              height: 100.0,
-              child: Text('logo',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-                textAlign: TextAlign.center,
-              )
-            ),
+                margin: EdgeInsets.only(bottom: 20.0),
+                child: Text(
+                  '회원가입',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                )),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0, bottom: 10.0),
+              margin: EdgeInsets.only(
+                  left: 50.0, right: 50.0, top: 10.0, bottom: 10.0),
               child: emailField(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 10.0, bottom: 20.0),
+              margin: EdgeInsets.only(
+                  left: 50.0, right: 50.0, top: 10.0, bottom: 20.0),
               child: passwordField(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 30.0),
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
               height: 50.0,
               width: double.infinity,
               child: submitButton(),
@@ -84,16 +86,20 @@ class _LoginState extends State<Login> with ValidationMixin {
   Widget submitButton() {
     return RaisedButton(
       color: Colors.blue,
-      child: Text('Sign In',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-        )
-      ),
+      child: Text('회원가입 완료',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          )),
       onPressed: () {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('time to pose $email and $password to my API');
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => SignIn(),
+          )).then((value) {
+            setState(() {});
+          });
         }
       },
     );
